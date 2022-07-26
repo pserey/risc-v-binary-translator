@@ -1,4 +1,4 @@
-# risc-v-binary-translator
+# RISC-V Binary/Hex Translator
 A simple translator for getting RISC-V assembly instructions from binary or hex machine code.
 
 All the information about binary RISC-V instruction set was taken from [this](https://riscv.org/wp-content/uploads/2017/05/riscv-spec-v2.2.pdf) paper.
