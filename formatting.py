@@ -2,7 +2,11 @@ import yaml
 
 
 def _rname(reg_add):
-    return f'x{int(reg_add, 2)}'
+    xname = f'x{int(reg_add, 2)}'
+    stream = open('regs.yaml', 'r')
+    regs = yaml.load(stream, Loader=yaml.FullLoader)
+
+    return regs[xname]
 
 
 def calc_imm(conteudos):
