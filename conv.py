@@ -48,7 +48,6 @@ def inst_decode(instruction):
             # shift lógicos tem a formatação de instruções R
             # shamt = shift amount
             else:
-                funct7, shamt, rs1, funct3, rd, opcode = 
                 conteudos['funct7'], conteudos['shamt'], conteudos['rs1'], 
                 conteudos['funct3'], conteudos['rd'], conteudos['opcode'] = decode_R(instruction)
 
