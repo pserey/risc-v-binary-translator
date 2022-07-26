@@ -29,22 +29,27 @@ def format_R(conteudos):
 def format_I(conteudos):
     inst = ''
     # logica imediata?
-    if conteudos['opcode'] == '0010011':
-        match conteudos['funct3']:
-            case '000': inst = 'addi'
-            case '010': inst = 'slti'
-            case '011': inst = 'sltiu'
-            case '100': inst = 'xori'
-            case '110': inst = 'ori'
-            case '111': inst = 'andi'
-    # load?
-    elif conteudos['opcode'] == '0000011':
-        match conteudos['funct3']:
-            case '000': inst = 'lb'
-            case '001': inst = 'lh'
-            case '010': inst = 'lw'
-            case '100': inst = 'lbu'
-            case '101': inst = 'lhu'
+    if (len(conteudos) == 5):
+        if conteudos['opcode'] == '0010011':
+            match conteudos['funct3']:
+                case '000': inst = 'addi'
+                case '010': inst = 'slti'
+                case '011': inst = 'sltiu'
+                case '100': inst = 'xori'
+                case '110': inst = 'ori'
+                case '111': inst = 'andi'
+        # load?
+        elif conteudos['opcode'] == '0000011':
+            match conteudos['funct3']:
+                case '000': inst = 'lb'
+                case '001': inst = 'lh'
+                case '010': inst = 'lw'
+                case '100': inst = 'lbu'
+                case '101': inst = 'lhu'
+    else:
+        if conteudos['funct3'] == '001': inst = 'slli'
+        elif conteudos['funct7'] == '0100000': inst = 'srai'
+        else: inst = 'srli'
 
     return f"{inst} {_rname(conteudos['rd'])}, {_rname(conteudos['rs1'])}, {conteudos['imm']}"
 

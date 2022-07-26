@@ -11,11 +11,8 @@ def inst_type(instruction):
     elif opcode == '1100011': formato = 'SB'
     elif opcode == '0100011': formato = 'S'
     elif opcode == '0110111' or opcode == '0010111': formato = 'U'
-    elif opcode == '0000011' or opcode == '1100111': formato = 'I'
+    elif opcode == '0000011' or opcode == '1100111' or opcode == '0010011': formato = 'I'
     elif opcode == '0110011': formato = 'R'
-    elif opcode == '0010011':
-        if funct3 == '001' or funct3 == '101': formato = 'R'
-        else: formato = 'I'
 
     return formato
 
@@ -61,12 +58,25 @@ def inst_decode(instruction):
             return format_S(conteudos)
         case 'I':
             imm, rs1, funct3, rd, opcode = decode_I(instruction)
-            conteudos = {}
-            conteudos['imm'] = imm
-            conteudos['rs1'] = rs1
-            conteudos['funct3'] = funct3
-            conteudos['rd'] = rd
-            conteudos['opcode'] = opcode
+            # se é 001 ou 101 então é shift lógico e portanto tem formatação diferente
+            if ((opcode == '0010011' and (funct3 != '001' or funct3 != '101')) or opcode == '0000011'):
+                conteudos = {}
+                conteudos['imm'] = imm
+                conteudos['rs1'] = rs1
+                conteudos['funct3'] = funct3
+                conteudos['rd'] = rd
+                conteudos['opcode'] = opcode
+            # shift lógicos tem a formatação de instruções R
+            # shamt = shift amount
+            else:
+                funct7, shamt, rs1, funct3, rd, opcode = decode_R(instruction)
+                conteudos = {}
+                conteudos['funct7'] = funct7
+                conteudos['shamt'] = shamt
+                conteudos['rs1'] = rs1
+                conteudos['funct3'] = funct3
+                conteudos['rd'] = rd
+                conteudos['opcode'] = opcode
 
             return format_I(conteudos)
         case 'U':
