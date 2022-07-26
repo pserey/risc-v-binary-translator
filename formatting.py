@@ -46,7 +46,7 @@ def format_I(conteudos):
             case '100': inst = 'lbu'
             case '101': inst = 'lhu'
 
-    return f"{inst} {_rname(conteudos['rd'])}, {_rname(conteudos['rs1'])}, {_rname(conteudos['imm'])}"
+    return f"{inst} {_rname(conteudos['rd'])}, {_rname(conteudos['rs1'])}, {conteudos['imm']}"
 
 def calc_imm(conteudos):
     cycle = int(conteudos['imm_cycle_32'], 2)
