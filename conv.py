@@ -42,7 +42,7 @@ def inst_decode(instruction):
             imm, rs1, funct3, rd, opcode = decode_I(instruction)
             conteudos = {}
             # se é 001 ou 101 então é shift lógico e portanto tem formatação diferente
-            if ((opcode == '0010011' and (funct3 != '001' or funct3 != '101')) or opcode == '0000011'):
+            if ((opcode == '0010011' and (funct3 != '001' and funct3 != '101')) or opcode == '0000011'):
                 conteudos['imm'] = imm
                 conteudos['rs1'] = rs1
                 conteudos['funct3'] = funct3
