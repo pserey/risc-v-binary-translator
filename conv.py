@@ -43,13 +43,21 @@ def inst_decode(instruction):
             conteudos = {}
             # se é 001 ou 101 então é shift lógico e portanto tem formatação diferente
             if ((opcode == '0010011' and (funct3 != '001' or funct3 != '101')) or opcode == '0000011'):
-                conteudos['imm'], conteudos['rs1'], conteudos['funct3'], 
-                conteudos['rd'], conteudos['opcode'] = decode_I(instruction)
+                conteudos['imm'] = imm
+                conteudos['rs1'] = rs1
+                conteudos['funct3'] = funct3
+                conteudos['rd'] = rd
+                conteudos['opcode'] = opcode
             # shift lógicos tem a formatação de instruções R
             # shamt = shift amount
             else:
-                conteudos['funct7'], conteudos['shamt'], conteudos['rs1'], 
-                conteudos['funct3'], conteudos['rd'], conteudos['opcode'] = decode_R(instruction)
+                funct7, shamt, rs1, funct3, rd, opcode = decode_R(instruction)
+                conteudos['funct7'] = funct7
+                conteudos['shamt'] = shamt
+                conteudos['rs1'] = rs1
+                conteudos['funct3'] = funct3
+                conteudos['rd'] = rd
+                conteudos['opcode'] = opcode
 
             return format_I(conteudos)
         case 'U':

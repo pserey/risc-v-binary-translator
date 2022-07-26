@@ -30,12 +30,12 @@ def format_I(conteudos):
     instrucoes = yaml.load(stream, Loader=yaml.FullLoader)
 
     for dict in instrucoes['I']:
-        if conteudos['funct3'] == dict['funct3']: inst = dict['name']
+        if conteudos['funct3'] == dict['funct3'] and conteudos['opcode'] == dict['opcode']: inst = dict['name']
 
     # formatação para instruções de logica imediata
     if (len(conteudos) == 5):
         if conteudos['opcode'] == '0010011':
-            return f"{inst} {_rname(conteudos['rd'])}, {_rname(conteudos['rs1'])}, {conteudos['imm']}"
+            return f"{inst} {_rname(conteudos['rd'])}, {_rname(conteudos['rs1'])}, {int(conteudos['imm'], 2)}"
         # formatação para instruções de load
         elif conteudos['opcode'] == '0000011':
             return f"{inst} {_rname(conteudos['rd'])}, {conteudos['imm']}({_rname(conteudos['rs1'])})"
