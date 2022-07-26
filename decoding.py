@@ -1,6 +1,6 @@
 # instruções de branch
 def decode_SB(instruction):
-    imm_cycle_32 = instruction[0:7]
+    imm_cycle_32 = instruction[:7]
     rs2 = instruction[7:12]
     rs1 = instruction[12:17]
     funct3 = instruction[17:20]
@@ -14,7 +14,7 @@ def decode_SB(instruction):
 # instruções de load ou lógicas imediatas
 def decode_I(instruction):
     # pode ser offset em load ou constante em lógicas
-    imm = instruction[0:12]
+    imm = instruction[:12]
     rs1 = instruction[12:17]
     funct3 = instruction[17:20]
     rd = instruction[20:25]
@@ -25,7 +25,7 @@ def decode_I(instruction):
 
 # instruções de store
 def decode_S(instruction):
-    imm_cycle_32 = instruction[0:7]
+    imm_cycle_32 = instruction[:7]
     rs2 = instruction[7:12]
     rs1 = instruction[12:17]
     funct3 = instruction[17:20]
@@ -37,7 +37,7 @@ def decode_S(instruction):
 
 # instruções de shift e não imediatas
 def decode_R(instruction):
-    funct7 = instruction[0:7]
+    funct7 = instruction[:7]
     rs2 = instruction[7:12]
     rs1 = instruction[12:17]
     funct3 = instruction[17:20]
@@ -49,11 +49,11 @@ def decode_R(instruction):
 
 # simplesmente jal.
 def decode_UJ(instruction):
-    imm = instruction[0:20]
+    imm = instruction[:20]
     rd = instruction[20:25]
 
 
 # LUI e AUIPC
 def decode_U(instruction):
-    imm = instruction[0:20]
+    imm = instruction[:20]
     rd = instruction[20:25]

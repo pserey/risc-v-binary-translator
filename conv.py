@@ -5,7 +5,6 @@ from formatting import *
 def inst_type(instruction):
     formato = ''
     opcode = instruction[25:len(instruction) + 1]
-    funct3 = instruction[17:20]
 
     if opcode == '1101111': formato = 'UJ'
     elif opcode == '1100011': formato = 'SB'
@@ -22,61 +21,36 @@ def inst_decode(instruction):
 
     match formato:
         case 'R':
-            funct7, rs2, rs1, funct3, rd, opcode = decode_R(instruction)
             conteudos = {}
-            conteudos['funct7'] = funct7
-            conteudos['rs2'] = rs2
-            conteudos['rs1'] = rs1
-            conteudos['funct3'] = funct3
-            conteudos['rd'] = rd
-            conteudos['opcode'] = opcode
+            conteudos['funct7'], conteudos['rs2'], conteudos['rs1'], 
+            conteudos['funct3'], conteudos['rd'], conteudos['opcode'] = decode_R(instruction)
 
             return format_R(conteudos)
         case 'SB':
-            imm_cycle_32, rs2, rs1, funct3, imm_offset, opcode = decode_SB(instruction)
             conteudos = {}
-            conteudos['imm_cycle_32'] = imm_cycle_32
-            conteudos['rs2'] = rs2
-            conteudos['rs1'] = rs1
-            conteudos['funct3'] = funct3
-            conteudos['rd'] = rd
-            conteudos['imm_offset'] = imm_offset
-            conteudos['opcode'] = opcode
+            conteudos['imm_cycle_32'], conteudos['rs2'], conteudos['rs1'], 
+            conteudos['funct3'], conteudos['rd'], conteudos['imm_offset'], conteudos['opcode'] = decode_SB(instruction)
 
             return format_SB(conteudos)
         case 'S':
-            imm_cycle_32, rs2, rs1, funct3, imm_offset, opcode = decode_S(instruction)
             conteudos = {}
-            conteudos['imm_cycle_32'] = imm_cycle_32
-            conteudos['rs2'] = rs2
-            conteudos['rs1'] = rs1
-            conteudos['funct3'] = funct3
-            conteudos['rd'] = rd
-            conteudos['imm_offset'] = imm_offset
-            conteudos['opcode'] = opcode
+            conteudos['imm_cycle_32'], conteudos['rs2'], conteudos['rs1'], 
+            conteudos['funct3'], conteudos['rd'], conteudos['imm_offset'], conteudos['opcode'] = decode_S(instruction)
 
             return format_S(conteudos)
         case 'I':
             imm, rs1, funct3, rd, opcode = decode_I(instruction)
+            conteudos = {}
             # se é 001 ou 101 então é shift lógico e portanto tem formatação diferente
             if ((opcode == '0010011' and (funct3 != '001' or funct3 != '101')) or opcode == '0000011'):
-                conteudos = {}
-                conteudos['imm'] = imm
-                conteudos['rs1'] = rs1
-                conteudos['funct3'] = funct3
-                conteudos['rd'] = rd
-                conteudos['opcode'] = opcode
+                conteudos['imm'], conteudos['rs1'], conteudos['funct3'], 
+                conteudos['rd'], conteudos['opcode'] = decode_I(instruction)
             # shift lógicos tem a formatação de instruções R
             # shamt = shift amount
             else:
-                funct7, shamt, rs1, funct3, rd, opcode = decode_R(instruction)
-                conteudos = {}
-                conteudos['funct7'] = funct7
-                conteudos['shamt'] = shamt
-                conteudos['rs1'] = rs1
-                conteudos['funct3'] = funct3
-                conteudos['rd'] = rd
-                conteudos['opcode'] = opcode
+                funct7, shamt, rs1, funct3, rd, opcode = 
+                conteudos['funct7'], conteudos['shamt'], conteudos['rs1'], 
+                conteudos['funct3'], conteudos['rd'], conteudos['opcode'] = decode_R(instruction)
 
             return format_I(conteudos)
         case 'U':
