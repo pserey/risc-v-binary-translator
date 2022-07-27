@@ -1,5 +1,7 @@
-# RISC-V Binary/Hex Translator
-A simple translator for getting RISC-V assembly instructions from binary or hex machine code.
+# 32 bit RISC-V Binary/Hex Translator
+A simple translator for getting 32 bit RISC-V assembly instructions from binary or hex machine code.
+
+As it is an early version, it works as an interactive CLI. Firstly it asks for the instruction format (hex/bin), after that, it takes any binary or hexadecimal instruction code up to 32 bits and outputs the respective RISC-V instruction.
 
 All the information about binary RISC-V instruction set was taken from [this](https://riscv.org/wp-content/uploads/2017/05/riscv-spec-v2.2.pdf) paper.
 
