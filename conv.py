@@ -66,7 +66,7 @@ def inst_decode(instruction, options):
 def main():
     print('as instruções serão em binário ou hexadecimal? (b/x)')
     r = input()
-    print('opções (sd/sx): ')
+    print('opções (sb/sx/SD): ')
     op = input()
     match r:
         case 'b':
