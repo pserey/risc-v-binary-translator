@@ -64,26 +64,45 @@ def inst_decode(instruction, options):
 
 
 def main():
-    print('as instruções serão em binário ou hexadecimal? (b/x)')
-    r = input()
-    print('opções (sb/sx/SD): ')
-    op = input()
-    match r:
-        case 'b':
-            while True:
-                print('instrução (para sair, digite s): ')
-                inst = input()
-                if (inst == 's'): break
+    print('interativo ou leitura de arquivo? (i/l)')
+    o1 = input()
+    if o1 == 'l':
+        print('endereço do arquivo: ')
+        address = input()
+        print('opções (sb/sx): ')
+        op = input()
 
-                print(inst_decode(f'{inst:0>32}', op))
-        case 'x':
-            while True:
-                print('instrução (para sair, digite s): ')
-                inst = f'{input()}'
-                if (inst == 's'): break
+        instructions = open(address, 'r')
 
-                hex_to_bin = f'{bin(int(inst, 16))[2:]:0>32}'
-                print(inst_decode(hex_to_bin, op))
+        while True:
+            inst = instructions.readline().strip()
+            if not inst: break
+
+            print(inst_decode(f'{inst:0>32}', op))
+
+        instructions.close()
+
+    elif o1 == 'i':
+        print('as instruções serão em binário ou hexadecimal? (b/x)')
+        r = input()
+        print('opções (sb/sx): ')
+        op = input()
+        match r:
+            case 'b':
+                while True:
+                    print('instrução (para sair, digite s): ')
+                    inst = input().strip()
+                    if (inst == 's'): break
+
+                    print(inst_decode(f'{inst:0>32}', op))
+            case 'x':
+                while True:
+                    print('instrução (para sair, digite s): ')
+                    inst = input().strip()
+                    if (inst == 's'): break
+
+                    hex_to_bin = f'{bin(int(inst, 16))[2:]:0>32}'
+                    print(inst_decode(hex_to_bin, op))
 
 
 if __name__ == '__main__':
