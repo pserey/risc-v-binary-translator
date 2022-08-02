@@ -16,7 +16,7 @@ def inst_type(instruction):
     return formato
 
 
-def inst_decode(instruction):
+def inst_decode(instruction, options):
     formato = inst_type(instruction)
 
     match formato:
@@ -70,14 +70,19 @@ def main():
         case 'b':
             while True:
                 print('instrução (para sair, digite s): ')
-                inst = f'{input()}'
+                inst = input()
                 if (inst == 's'): break
+                print('opções (sd/sx): ')
+                op = input()
+
                 print(inst_decode(f'{inst:0>32}'))
         case 'x':
             while True:
                 print('instrução (para sair, digite s): ')
                 inst = f'{input()}'
                 if (inst == 's'): break
+                print('opções (sd/sx): ')
+                op = input()
 
                 hex_to_bin = f'{bin(int(inst, 16))[2:]:0>32}'
                 instrucao = inst_decode(hex_to_bin)
