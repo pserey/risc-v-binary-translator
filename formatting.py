@@ -26,7 +26,7 @@ def _conv_bx(value, options):
         case (2): return bin(value)
         case (16): return hex(value)
     
-    return base
+    return value
 
 
 # não usa options ainda
