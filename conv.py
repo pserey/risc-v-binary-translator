@@ -32,7 +32,7 @@ def inst_decode(instruction):
             return format_SB(conteudos)
         case 'S':
             conteudos = {}
-            conteudos['imm_cycle_32'], conteudos['rs2'], conteudos['rs1'], conteudos['funct3'], conteudos['rd'], conteudos['imm_offset'], conteudos['opcode'] = decode_S(instruction)
+            conteudos['imm_cycle_32'], conteudos['rs2'], conteudos['rs1'], conteudos['funct3'], conteudos['imm_offset'], conteudos['opcode'] = decode_S(instruction)
 
             return format_S(conteudos)
         case 'I':
@@ -70,9 +70,9 @@ def main():
         case 'b':
             while True:
                 print('instrução (para sair, digite s): ')
-                inst = f'{input():0>32}'
+                inst = f'{input()}'
                 if (inst == 's'): break
-                print(inst_decode(inst))
+                print(inst_decode(f'{inst:0>32}'))
         case 'x':
             while True:
                 print('instrução (para sair, digite s): ')
