@@ -22,20 +22,17 @@ def inst_decode(instruction):
     match formato:
         case 'R':
             conteudos = {}
-            conteudos['funct7'], conteudos['rs2'], conteudos['rs1'], 
-            conteudos['funct3'], conteudos['rd'], conteudos['opcode'] = decode_R(instruction)
+            conteudos['funct7'], conteudos['rs2'], conteudos['rs1'], conteudos['funct3'], conteudos['rd'], conteudos['opcode'] = decode_R(instruction)
 
             return format_R(conteudos)
         case 'SB':
             conteudos = {}
-            conteudos['imm_cycle_32'], conteudos['rs2'], conteudos['rs1'], 
-            conteudos['funct3'], conteudos['rd'], conteudos['imm_offset'], conteudos['opcode'] = decode_SB(instruction)
+            conteudos['imm_cycle_32'], conteudos['rs2'], conteudos['rs1'], conteudos['funct3'], conteudos['imm_offset'], conteudos['opcode'] = decode_SB(instruction)
 
             return format_SB(conteudos)
         case 'S':
             conteudos = {}
-            conteudos['imm_cycle_32'], conteudos['rs2'], conteudos['rs1'], 
-            conteudos['funct3'], conteudos['rd'], conteudos['imm_offset'], conteudos['opcode'] = decode_S(instruction)
+            conteudos['imm_cycle_32'], conteudos['rs2'], conteudos['rs1'], conteudos['funct3'], conteudos['rd'], conteudos['imm_offset'], conteudos['opcode'] = decode_S(instruction)
 
             return format_S(conteudos)
         case 'I':

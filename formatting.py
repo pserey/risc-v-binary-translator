@@ -56,7 +56,7 @@ def format_SB(conteudos):
     for dict in instrucoes['SB']:
         if conteudos['funct3'] == dict['funct3']: inst = dict['name']
 
-    return f"{inst} {_rname(conteudos['rs1'])}, {_rname(conteudos['rs2'])}, {calc_imm(conteudos)})"
+    return f"{inst} {_rname(conteudos['rs1'])}, {_rname(conteudos['rs2'])}, {calc_imm(conteudos)}"
 
 
 def format_S(conteudos):
